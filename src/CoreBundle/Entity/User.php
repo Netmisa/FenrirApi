@@ -69,13 +69,13 @@ class User extends BaseUser
     private $instances;
 
     /**
-     * @var Role
+     * @var AccessType
      *
-     * @ORM\Column(name="role_id", nullable=false)
-     * @ORM\OneToOne(targetEntity="Role")
-     * @ORM\JoinColumn(name="role_id", referencedColumnName="id")
+     * @ORM\Column(name="access_type_id", nullable=false)
+     * @ORM\OneToOne(targetEntity="AccessType")
+     * @ORM\JoinColumn(name="access_type_id", referencedColumnName="id")
      */
-    private $role;
+    private $accessType;
 
     /**
      * @var \Doctrine\Common\Collections\ArrayCollection
@@ -278,25 +278,25 @@ class User extends BaseUser
     }
 
     /**
-    * Gets the value of role.
+    * Gets the value of accessType.
     *
-    * @return Role
+    * @return AccessType
     */
-    public function getRole()
+    public function getAccessType()
     {
-        return $this->role;
+        return $this->accessType;
     }
 
     /**
-    * Sets the value of role.
+    * Sets the value of accessType.
     *
-    * @param Role $role the role
+    * @param AccessType $accessType the access type
     *
     * @return self
     */
-    public function setRole(Role $role)
+    public function setAccessType(AccessType $accessType)
     {
-        $this->role = $role;
+        $this->accessType = $accessType;
 
         return $this;
     }

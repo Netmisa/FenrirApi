@@ -6,12 +6,12 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * Role
+ * AccessType
  *
- * @ORM\Table(name="role")
- * @ORM\Entity(repositoryClass="CoreBundle\Repository\RoleRepository")
+ * @ORM\Table(name="access_type")
+ * @ORM\Entity(repositoryClass="CoreBundle\Repository\AccessTypeRepository")
  */
-class Role
+class AccessType
 {
     /**
      * @var int
@@ -60,7 +60,7 @@ class Role
      *
      * @param string $name
      *
-     * @return Role
+     * @return AccessType
      */
     public function setName($name)
     {
