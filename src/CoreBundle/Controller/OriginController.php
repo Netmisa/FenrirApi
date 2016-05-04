@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
 use FOS\RestBundle\View\View;
+use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Controller\FOSRestController;
 use CoreBundle\Entity\Origin;
 use CoreBundle\Form\OriginType;
@@ -16,16 +17,21 @@ class OriginController extends FOSRestController
     /**
      * Retrieve all origins.
      *
+     * @Rest\Route(defaults={"origin" = null})
+     *
+     * @param Origin $origin
+     *
      * @return View
      */
-    public function getOriginsAction()
+    public function getOriginsAction(Origin $origin = null)
     {
-        $origins = $this->getDoctrine()
-            ->getRepository('CoreBundle:Origin')
-            ->findAll()
-        ;
+        $originRepository = $this->getDoctrine()->getRepository('CoreBundle:Origin');
 
-        return View::create($origins);
+        if (null === $origin) {
+            return View::create($originRepository->findAll());
+        } else {
+            return View::create($origin);
+        }
     }
 
     /**
@@ -58,6 +64,14 @@ class OriginController extends FOSRestController
         return View::create($form, Response::HTTP_UNPROCESSABLE_ENTITY);
     }
 
+    /**
+     * @param Request $request
+     * @param Origin $origin
+     *
+     * @return View
+     *
+     * @throws ConflictHttpException
+     */
     public function patchOriginsAction(Request $request, Origin $origin)
     {
         $form = $this->createForm(OriginType::class, $origin);
