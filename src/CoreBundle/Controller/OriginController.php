@@ -83,7 +83,6 @@ class OriginController extends FOSRestController
             $em = $this->getDoctrine()->getManager();
 
             try {
-                $em->persist($origin);
                 $em->flush();
             } catch (UniqueConstraintViolationException $e) {
                 throw new ConflictHttpException($e->getMessage(), $e);
