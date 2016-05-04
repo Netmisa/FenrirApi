@@ -17,21 +17,29 @@ class OriginController extends FOSRestController
     /**
      * Retrieve all origins.
      *
-     * @Rest\Route(defaults={"origin" = null})
+     * @param Origin $origin
+     *
+     * @return View
+     */
+    public function getOriginsAction()
+    {
+        $originRepository = $this->getDoctrine()->getRepository('CoreBundle:Origin');
+
+        return View::create($originRepository->findAll());
+    }
+
+    /**
+     * Retrieve one origin by id.
+     *
+     * @Rest\Route("/origins/{id}")
      *
      * @param Origin $origin
      *
      * @return View
      */
-    public function getOriginsAction(Origin $origin = null)
+    public function getOriginAction(Origin $origin)
     {
-        $originRepository = $this->getDoctrine()->getRepository('CoreBundle:Origin');
-
-        if (null === $origin) {
-            return View::create($originRepository->findAll());
-        } else {
-            return View::create($origin);
-        }
+        return View::create($origin);
     }
 
     /**
