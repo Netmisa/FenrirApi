@@ -101,4 +101,19 @@ class OriginController extends FOSRestController
 
         return View::create($form, Response::HTTP_UNPROCESSABLE_ENTITY);
     }
+
+    /**
+     * @param Origin $origin
+     *
+     * @return View
+     */
+    public function deleteOriginsAction(Origin $origin)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $em->remove($origin);
+        $em->flush();
+
+        return View::create($origin->getId(), Response::HTTP_OK);
+    }
 }
