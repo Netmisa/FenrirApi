@@ -74,6 +74,7 @@ fos_user:
     user_class: CoreBundle\Entity\User
 
 fos_rest:
+    disable_csrf_role: IS_AUTHENTICATED_ANONYMOUSLY
     routing_loader:
         default_format: json
     param_fetcher_listener: true
