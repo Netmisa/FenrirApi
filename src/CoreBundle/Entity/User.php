@@ -39,8 +39,8 @@ class User extends BaseUser
      * @var BillingPlan
      *
      * @ORM\Column(name="billing_plan_id", nullable=false)
-     * @ORM\OneToOne(targetEntity="BillingPlan")
-     * @ORM\JoinColumn(name="billing_plan_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="BillingPlan")
+     * @ORM\JoinColumn(name="billing_plan_id")
      */
     private $billingPlan;
 
@@ -48,15 +48,15 @@ class User extends BaseUser
      * @var Origin
      *
      * @ORM\Column(name="origin_id", nullable=false)
-     * @ORM\OneToOne(targetEntity="Origin")
-     * @ORM\JoinColumn(name="origin_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="Origin")
+     * @ORM\JoinColumn(name="origin_id")
      */
     private $origin;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(type="datetime", nullable=true, options={"default"=null})
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $blockUntil;
 
@@ -72,18 +72,18 @@ class User extends BaseUser
      * @var AccessType
      *
      * @ORM\Column(name="access_type_id", nullable=false)
-     * @ORM\OneToOne(targetEntity="AccessType")
-     * @ORM\JoinColumn(name="access_type_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="AccessType")
+     * @ORM\JoinColumn(name="access_type_id")
      */
     private $accessType;
 
     /**
      * @var \Doctrine\Common\Collections\ArrayCollection
      *
-     * @ORM\ManyToMany(targetEntity="Key")
+     * @ORM\ManyToOne(targetEntity="Key")
      * @ORM\JoinTable(name="users_keys",
-     *      joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="key_id", referencedColumnName="id", unique=true)}
+     *      joinColumns={@ORM\JoinColumn(name="user_id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="key_id", unique=true)}
      *      )
      */
     private $keys;
