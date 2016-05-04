@@ -32,7 +32,7 @@ class AccessType
     /**
      * @var \Datetime
      *
-     * @Gedmo\Timestampable(on="created_at")
+     * @Gedmo\Timestampable(on="create")
      * @ORM\Column(type="datetime")
      */
     private $createdAt;
@@ -41,7 +41,7 @@ class AccessType
      * @var \Datetime
      *
      * @ORM\Column(type="datetime")
-     * @Gedmo\Timestampable(on="updated_at")
+     * @Gedmo\Timestampable(on="update")
      */
     private $updatedAt;
 

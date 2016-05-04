@@ -53,7 +53,7 @@ class BillingPlan
     /**
      * @var \Datetime
      *
-     * @Gedmo\Timestampable(on="created_at")
+     * @Gedmo\Timestampable(on="create")
      * @ORM\Column(type="datetime")
      */
     private $createdAt;
@@ -62,7 +62,7 @@ class BillingPlan
      * @var \Datetime
      *
      * @ORM\Column(type="datetime")
-     * @Gedmo\Timestampable(on="updated_at")
+     * @Gedmo\Timestampable(on="update")
      */
     private $updatedAt;
 
