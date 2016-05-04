@@ -37,8 +37,8 @@ class OriginController extends FOSRestController
      */
     public function postOriginsAction(Request $request)
     {
-        $entity = new Origin();
-        $form = $this->createForm(OriginType::class, $entity);
+        $origin = new Origin();
+        $form = $this->createForm(OriginType::class, $origin);
 
         $form->handleRequest($request);
 
@@ -46,13 +46,36 @@ class OriginController extends FOSRestController
             $em = $this->getDoctrine()->getManager();
 
             try {
-                $em->persist($entity);
+                $em->persist($origin);
                 $em->flush();
             } catch (UniqueConstraintViolationException $e) {
                 throw new ConflictHttpException($e->getMessage(), $e);
             }
 
-            return View::create($entity->getId(), Response::HTTP_CREATED);
+            return View::create($origin->getId(), Response::HTTP_CREATED);
+        }
+
+        return View::create($form, Response::HTTP_UNPROCESSABLE_ENTITY);
+    }
+
+    public function patchOriginsAction(Request $request, Origin $origin)
+    {
+        $form = $this->createForm(OriginType::class, $origin);
+
+        $form->submit($request->request->get('origin'));
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+
+            try {
+                $em->persist($origin);
+                $em->flush();
+            } catch (UniqueConstraintViolationException $e) {
+                throw new ConflictHttpException($e->getMessage(), $e);
+            }
+
+            return View::create(null, Response::HTTP_NO_CONTENT);
         }
 
         return View::create($form, Response::HTTP_UNPROCESSABLE_ENTITY);
