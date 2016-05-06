@@ -37,7 +37,7 @@ class UsersController extends FOSRestController
     }
 
     /**
-     * @RequestParam(name="username", requirements="[a-z0-9]+", strict=true)
+     * @RequestParam(name="username", requirements="[a-z_0-9]+", strict=true)
      * @RequestParam(name="enabled", requirements="[0|1]", nullable=true)
      * @RequestParam(name="locked", requirements="[0|1]", nullable=true)
      * @RequestParam(name="expired", requirements="[0|1]", nullable=true)
@@ -54,7 +54,7 @@ class UsersController extends FOSRestController
     }
 
     /**
-     * @QueryParam(name="username", requirements="[a-z0-9]+", nullable=true)
+     * @QueryParam(name="username", requirements="[a-z_0-9]+", nullable=true)
      * @QueryParam(name="enabled", requirements="[0|1]", nullable=true)
      * @QueryParam(name="locked", requirements="[0|1]", nullable=true)
      * @QueryParam(name="expired", requirements="[0|1]", nullable=true)

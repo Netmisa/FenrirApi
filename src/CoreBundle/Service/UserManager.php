@@ -45,7 +45,7 @@ class UserManager extends BaseUserManager
         $user = $this->createUser();
 
         $this->setProperties($user, $data);
-        $user = $this->objectManager->persist($user);
+        $this->objectManager->persist($user);
         $this->objectManager->flush();
         return $user;
     }
