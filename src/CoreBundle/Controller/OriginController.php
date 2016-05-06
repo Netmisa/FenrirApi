@@ -89,7 +89,7 @@ class OriginController extends FOSRestController
             throw new ConflictHttpException($e->getMessage(), $e);
         }
 
-        return View::create(null, Response::HTTP_NO_CONTENT);
+        return View::create($origin, Response::HTTP_OK);
     }
 
     /**

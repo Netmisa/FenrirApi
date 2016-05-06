@@ -119,8 +119,6 @@ class OriginControllerTest extends WebTestCase
 
         $this->assertTrue($client->getResponse()->isSuccessful(), 'patch origins returns a successful status code');
 
-        $client->request('GET', '/origins/1');
-
         $origin = json_decode($client->getResponse()->getContent());
 
         $this->assertEquals('navitia.io_updated', $origin->name);
