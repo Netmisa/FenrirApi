@@ -3,7 +3,6 @@
 namespace CoreBundle\Controller;
 
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
 use FOS\RestBundle\View\View;
@@ -11,7 +10,6 @@ use FOS\RestBundle\Request\ParamFetcher;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Controller\FOSRestController;
 use CoreBundle\Entity\Origin;
-use CoreBundle\Form\OriginType;
 
 class OriginController extends FOSRestController
 {
