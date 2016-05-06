@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "f0ecded870cb8241f8b140e129b9cad9",
-    "content-hash": "0b66cd802ea21e187beac8720aebf9a7",
+    "hash": "07450a3afb826368ec368e4bb26feef0",
+    "content-hash": "15f22ae2501801382352ae6415b1cfff",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -46,6 +46,48 @@
                 "transliterator"
             ],
             "time": "2015-09-28 16:26:35"
+        },
+        {
+            "name": "cube/composer-dist-installer",
+            "version": "1.0-beta5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Cube-Solutions/composer-dist-installer.git",
+                "reference": "a5e59e4889fbb90b995229d297739614c18e7c79"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Cube-Solutions/composer-dist-installer/zipball/a5e59e4889fbb90b995229d297739614c18e7c79",
+                "reference": "a5e59e4889fbb90b995229d297739614c18e7c79",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4"
+            },
+            "require-dev": {
+                "composer/composer": "@dev",
+                "mockery/mockery": "^0.9.4",
+                "phpunit/phpunit": ">=4.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Cube\\ComposerDistInstaller\\": "src/",
+                    "CubeTest\\ComposerDistInstaller\\": "test/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Gabriel Somoza",
+                    "email": "gabriel.somoza@cu.be"
+                }
+            ],
+            "description": "Install .dist template files automatically on project setup. Compatible with any PHP framework or package.",
+            "time": "2015-09-18 08:16:44"
         },
         {
             "name": "doctrine/annotations",
@@ -3496,7 +3538,8 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "friendsofsymfony/user-bundle": 20,
-        "friendsofsymfony/rest-bundle": 10
+        "friendsofsymfony/rest-bundle": 10,
+        "cube/composer-dist-installer": 10
     },
     "prefer-stable": false,
     "prefer-lowest": false,
