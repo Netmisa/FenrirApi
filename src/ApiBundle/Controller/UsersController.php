@@ -7,6 +7,7 @@ use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Request\ParamFetcherInterface;
 use FOS\RestBundle\Controller\Annotations\RequestParam;
 use FOS\RestBundle\Controller\Annotations\QueryParam;
+use CoreBundle\Entity\User;
 
 class UsersController extends FOSRestController
 {
@@ -17,21 +18,14 @@ class UsersController extends FOSRestController
         return $this->handleView($this->view($users));
     }
 
-    public function getUserAction($id)
+    public function getUserAction(User $user)
     {
-        $user = $this->get('core.service.user')->findUserBy(['id' => $id]);
-        if ($user === null) {
-            throw new NotFoundHttpException();
-        }
-
         return $this->handleView($this->view($user));
     }
 
-    public function deleteUserAction($id)
+    public function deleteUserAction(User $user)
     {
-        if ($this->get('core.service.user')->delete($id) === false) {
-            throw new NotFoundHttpException();
-        }
+        $this->get('core.service.user')->deleteUser($user);
 
         return $this->handleView($this->view([]));
     }
@@ -63,9 +57,9 @@ class UsersController extends FOSRestController
      * @QueryParam(name="email", requirements="[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}", nullable=true)
      * @QueryParam(name="password", requirements="[a-z0-9]+", nullable=true)
      */
-    public function patchUserAction(ParamFetcherInterface $paramFetcher, $id)
+    public function patchUserAction(ParamFetcherInterface $paramFetcher, User $user)
     {
-        $user = $this->get('core.service.user')->update($id, $paramFetcher->all());
+        $user = $this->get('core.service.user')->update($user, $paramFetcher->all());
 
         return $this->handleView($this->view($user));
     }

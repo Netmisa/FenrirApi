@@ -73,7 +73,7 @@ class UsersControllerTest extends WebTestCase
             $result = json_decode($client->getResponse()->getContent());
 
             $this->assertEquals($user, $result->username);
-            $this->userManager->delete($this->userManager->findUserBy(['id' => $result->id]));
+            $this->userManager->deleteUser($this->userManager->findUserBy(['id' => $result->id]));
         }
     }
 
@@ -104,7 +104,7 @@ class UsersControllerTest extends WebTestCase
     private function purgeUsersDatabase()
     {
         foreach ($this->databaseUsers as $databaseUser) {
-            $this->userManager->delete($databaseUser);
+            $this->userManager->deleteUser($databaseUser);
         }
     }
 

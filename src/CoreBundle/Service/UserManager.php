@@ -50,23 +50,10 @@ class UserManager extends BaseUserManager
         return $user;
     }
 
-    public function update($id, array $data)
+    public function update(UserInterface $user, array $data)
     {
-        $user = $this->findUserBy(['id' => $id]);
-
         $this->setProperties($user, $data);
         $this->updateUser($user);
         return $user;
-    }
-
-    public function delete($id)
-    {
-        $user = $this->findUserBy(['id' => $id]);
-
-        if (is_null($user)) {
-            return false;
-        }
-        $this->deleteUser($user);
-        return true;
     }
 }
