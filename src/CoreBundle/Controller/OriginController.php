@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
 use FOS\RestBundle\View\View;
+use FOS\RestBundle\Request\ParamFetcher;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Controller\FOSRestController;
 use CoreBundle\Entity\Origin;
@@ -43,63 +44,54 @@ class OriginController extends FOSRestController
     }
 
     /**
-     * @param Request $request
+     * @Rest\RequestParam(name="name", requirements="[a-z_\.]+")
+     *
+     * @param ParamFetcher $paramFetcher
      *
      * @return View id of the created origin.
      *
      * @throws ConflictHttpException If name (unique) already exists.
      */
-    public function postOriginsAction(Request $request)
+    public function postOriginsAction(ParamFetcher $paramFetcher)
     {
         $origin = new Origin();
-        $form = $this->createForm(OriginType::class, $origin);
+        $origin->setName($paramFetcher->get('name'));
 
-        $form->handleRequest($request);
+        $em = $this->getDoctrine()->getManager();
 
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-
-            try {
-                $em->persist($origin);
-                $em->flush();
-            } catch (UniqueConstraintViolationException $e) {
-                throw new ConflictHttpException($e->getMessage(), $e);
-            }
-
-            return View::create($origin->getId(), Response::HTTP_CREATED);
+        try {
+            $em->persist($origin);
+            $em->flush();
+        } catch (UniqueConstraintViolationException $e) {
+            throw new ConflictHttpException($e->getMessage(), $e);
         }
 
-        return View::create($form, Response::HTTP_UNPROCESSABLE_ENTITY);
+        return View::create($origin->getId(), Response::HTTP_CREATED);
     }
 
     /**
-     * @param Request $request
+     * @Rest\RequestParam(name="name", requirements="[a-z_\.]+")
+     *
+     * @param ParamFetcher $paramFetcher
      * @param Origin $origin
      *
      * @return View
      *
      * @throws ConflictHttpException
      */
-    public function patchOriginsAction(Request $request, Origin $origin)
+    public function patchOriginsAction(ParamFetcher $paramFetcher, Origin $origin)
     {
-        $form = $this->createForm(OriginType::class, $origin);
+        $origin->setName($paramFetcher->get('name'));
 
-        $form->submit($request->request->get('origin'));
-        $form->handleRequest($request);
+        $em = $this->getDoctrine()->getManager();
 
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-
-            try {
-                $em->flush();
-            } catch (UniqueConstraintViolationException $e) {
-                throw new ConflictHttpException($e->getMessage(), $e);
-            }
-
-            return View::create(null, Response::HTTP_NO_CONTENT);
+        try {
+            $em->flush();
+        } catch (UniqueConstraintViolationException $e) {
+            throw new ConflictHttpException($e->getMessage(), $e);
         }
 
-        return View::create($form, Response::HTTP_UNPROCESSABLE_ENTITY);
+        return View::create(null, Response::HTTP_NO_CONTENT);
     }
 
     /**

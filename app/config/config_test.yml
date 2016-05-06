@@ -14,3 +14,14 @@ web_profiler:
 
 swiftmailer:
     disable_delivery: true
+
+# Doctrine Configuration for testing.
+# Uses a sqlite database for testing, located in var/ folder.
+doctrine:
+    dbal:
+        driver:   pdo_sqlite
+        path:     "%kernel.root_dir%/../var/fenrir_test.sqlite"
+        host:     127.0.0.1
+        port:     ~
+        dbname:   fenrir_test
+        charset:  UTF8
