@@ -1,4 +1,20 @@
 services:
-#    api.example:
-#        class: ApiBundle\Example
-#        arguments: ["@service_id", "plain_value", %parameter%]
+  gedmo.listener.timestampable:
+    class: Gedmo\Timestampable\TimestampableListener
+    tags:
+      - { name: doctrine.event_subscriber, connection: default }
+    calls:
+      - [ setAnnotationReader, [ "@annotation_reader" ] ]
+  core.service.user:
+    class: ApiBundle\Service\UserManager
+    arguments:
+      - '@security.encoder_factory'
+      - '@fos_user.util.username_canonicalizer'
+      - '@fos_user.util.email_canonicalizer'
+      - '@fos_user.object_manager'
+      - '%fos_user.model.user.class%'
+      - '@core.service.origin'
+  core.service.origin:
+    class: ApiBundle\Service\OriginManager
+    arguments:
+      - '@doctrine.orm.entity_manager'

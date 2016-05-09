@@ -1,24 +1,32 @@
 <?php
 
-namespace CoreBundle\Service;
+namespace ApiBundle\Service;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 use FOS\UserBundle\Util\CanonicalizerInterface;
 use FOS\UserBundle\Doctrine\UserManager as BaseUserManager;
 use FOS\UserBundle\Model\UserInterface;
+use ApiBundle\Service\OriginManager;
 
 class UserManager extends BaseUserManager
 {
-    public function __construct(EncoderFactoryInterface $encoderFactory, CanonicalizerInterface $usernameCanonicalizer, CanonicalizerInterface $emailCanonicalizer, ObjectManager $om, $class)
+    private $originManager;
+
+    public function __construct(EncoderFactoryInterface $encoderFactory, CanonicalizerInterface $usernameCanonicalizer, CanonicalizerInterface $emailCanonicalizer, ObjectManager $om, $class, OriginManager $originManager)
     {
         parent::__construct($encoderFactory, $usernameCanonicalizer, $emailCanonicalizer, $om, $class);
+
+        $this->originManager = $originManager;
     }
 
     private function setProperties(UserInterface $user, array $data)
     {
         if (array_key_exists('username', $data) && !is_null($data['username'])) {
             $user->setUsername($data['username']);
+        }
+        if (array_key_exists('originId', $data) && !is_null($data['originId'])) {
+            $user->setOrigin($this->originManager->find($data['originId']));
         }
         if (array_key_exists('enabled', $data) && !is_null($data['enabled'])) {
             $user->setEnabled($data['enabled'] == 1 ? true : false);

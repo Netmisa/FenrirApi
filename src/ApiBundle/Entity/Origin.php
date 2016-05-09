@@ -1,30 +1,17 @@
 <?php
 
-namespace CoreBundle\Entity;
+namespace ApiBundle\Entity;
 
-use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * Users
+ * Origin
  *
- * @ORM\Table(name="t_user")
- * @ORM\Entity(repositoryClass="CoreBundle\Repository\UserRepository")
- * @ORM\AttributeOverrides({
- *      @ORM\AttributeOverride(name="email", column=@ORM\Column(nullable = true)),
- *      @ORM\AttributeOverride(name="emailCanonical",
- *          column=@ORM\Column(
- *              nullable = true,
- *              unique   = false
- *          )
- *      ),
- *      @ORM\AttributeOverride(name="salt", column=@ORM\Column(nullable = true)),
- *      @ORM\AttributeOverride(name="password", column=@ORM\Column(nullable = true)),
- * })
- *
+ * @ORM\Table(name="origin")
+ * @ORM\Entity(repositoryClass="ApiBundle\Repository\OriginRepository")
  */
-class User extends BaseUser
+class Origin
 {
     /**
      * @var int
@@ -33,13 +20,20 @@ class User extends BaseUser
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    protected $id;
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=255, unique=true)
+     */
+    private $name;
 
     /**
      * @var \Datetime
      *
-     * @ORM\Column(type="datetime")
      * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(type="datetime")
      */
     private $createdAt;
 
@@ -51,11 +45,6 @@ class User extends BaseUser
      */
     private $updatedAt;
 
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
     /**
      * Get id
      *
@@ -64,6 +53,30 @@ class User extends BaseUser
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     *
+     * @return Origin
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
     }
 
     /**

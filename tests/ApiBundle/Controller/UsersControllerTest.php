@@ -4,11 +4,14 @@ namespace ApiBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Response;
+use ApiBundle\Entity\Origin;
 
 class UsersControllerTest extends WebTestCase
 {
     private $em;
     private $userManager;
+    private $databaseUsers;
+    private $origin;
     private $users = [
         [
             'username' => 'user1'
@@ -23,19 +26,33 @@ class UsersControllerTest extends WebTestCase
         self::bootKernel();
 
         $this->databaseUsers = [];
+        $this->origin = null;
         $this->em = static::$kernel->getContainer()->get('doctrine')->getManager();
         $this->userManager = static::$kernel->getContainer()->get('core.service.user');
     }
 
+    private function insertOrigins()
+    {
+        $originTableName = $this->em->getClassMetadata('ApiBundle:Origin')->getTableName();
+        $this->em->getConnection()->query('delete from '.$originTableName);
+        $this->origin = new Origin();
+
+        $this->origin->setName("my_origin");
+        $this->em->persist($this->origin);
+        $this->em->flush();
+    }
+
     private function insertUsers()
     {
-        foreach ($this->users as $user) {
+        foreach ($this->users as $key => $user) {
+            $user['originId'] = $this->origin;
             $this->databaseUsers[] = $this->userManager->create($user);
         }
     }
 
     public function setUp()
     {
+        $this->insertOrigins();
         $this->insertUsers();
     }
 
@@ -69,7 +86,7 @@ class UsersControllerTest extends WebTestCase
         $newUsers = ['user_a', 'user_b', 'user_c', 'user_d'];
 
         foreach ($newUsers as $user) {
-            $crawler = $client->request('POST', '/users', ['username' => $user]);
+            $crawler = $client->request('POST', '/users', ['username' => $user, 'originId' => $this->origin->getId()]);
             $result = json_decode($client->getResponse()->getContent());
 
             $this->assertEquals($user, $result->username);
