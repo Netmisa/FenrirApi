@@ -11,7 +11,7 @@ use ApiBundle\Entity\User;
 
 class UsersController extends FOSRestController
 {
-    public function getUsersAction(ParamFetcherInterface $paramFetcher)
+    public function getUsersAction()
     {
         $users = $this->get('core.service.user')->findUsers();
 
