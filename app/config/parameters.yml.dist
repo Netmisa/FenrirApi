@@ -6,11 +6,13 @@ parameters:
     database_user:     {{Fenrir Api Database User []?|=ENV[FENRIR_API_DATABASE_USER]|root}}
     database_password: {{Fenrir Api Database Password []?|=ENV[FENRIR_API_DATABASE_PASSWORD]|~}}
 
-    database_test_driver:   pdo_sqlite
+    database_test_driver:   {{Fenrir Api Database Driver Test []?|=ENV[FENRIR_API_DATABASE_TEST_DRIVER]|pdo_pgsql}}
     database_test_path:     "%kernel.root_dir%/../var/fenrir_test.sqlite"
-    database_test_host:     127.0.0.1
-    database_test_port:     ~
-    database_test_name:     fenrir_test
+    database_test_host:     {{Fenrir Api Database Host Test []?|=ENV[FENRIR_API_DATABASE_TEST_HOST]|127.0.0.1}}
+    database_test_port:     {{Fenrir Api Database Port Test []?|=ENV[FENRIR_API_DATABASE_TEST_PORT]|~}}
+    database_test_name:     {{Fenrir Api Database Name Test []?|=ENV[FENRIR_API_DATABASE_TEST_NAME]|fenrir_db_test}}
+    database_test_user:     {{Fenrir Api Database User Test []?|=ENV[FENRIR_API_DATABASE_TEST_USER]|fenrir_user}}
+    database_test_password: {{Fenrir Api Database Password Test []?|=ENV[FENRIR_API_DATABASE_TEST_PASSWORD]|fenrir_password}}
 
     mailer_transport:  smtp
     mailer_host:       127.0.0.1

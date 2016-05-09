@@ -16,7 +16,6 @@ swiftmailer:
     disable_delivery: true
 
 # Doctrine Configuration for testing.
-# Uses a sqlite database for testing, located in var/ folder.
 doctrine:
     dbal:
         driver:   "%database_test_driver%"
@@ -24,4 +23,6 @@ doctrine:
         host:     "%database_test_host%"
         port:     "%database_test_port%"
         dbname:   "%database_test_name%"
+        user:     "%database_test_user%"
+        password: "%database_test_password%"
         charset:  UTF8
