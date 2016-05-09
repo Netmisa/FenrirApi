@@ -111,7 +111,7 @@ class UsersControllerTest extends WebTestCase
 
         foreach ($this->databaseUsers as $databaseUser) {
             $newUsername = $databaseUser->getUsername() . '_edited';
-            $crawler = $client->request('PATCH', '/users/' . $databaseUser->getId() . '?username=' . $newUsername);
+            $crawler = $client->request('PATCH', '/users/' . $databaseUser->getId(), ['username' => $newUsername]);
             $result = json_decode($client->getResponse()->getContent());
 
             $this->assertEquals($result->username, $newUsername);
