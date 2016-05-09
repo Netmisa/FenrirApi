@@ -1,0 +1,6 @@
+api_users:
+    type:     rest
+    resource: ApiBundle\Controller\UsersController
+api_origins:
+    type:     rest
+    resource: ApiBundle\Controller\OriginsController

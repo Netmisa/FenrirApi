@@ -1,17 +1,17 @@
 <?php
 
-namespace CoreBundle\Entity;
+namespace ApiBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * Key
+ * Origin
  *
- * @ORM\Table(name="key")
- * @ORM\Entity(repositoryClass="CoreBundle\Repository\KeyRepository")
+ * @ORM\Table(name="origin")
+ * @ORM\Entity(repositoryClass="ApiBundle\Repository\OriginRepository")
  */
-class Key
+class Origin
 {
     /**
      * @var int
@@ -25,16 +25,9 @@ class Key
     /**
      * @var string
      *
-     * @ORM\Column(name="label", type="string", length=255)
+     * @ORM\Column(name="name", type="string", length=255, unique=true)
      */
-    private $label;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="token", type="guid", unique=true)
-     */
-    private $token;
+    private $name;
 
     /**
      * @var \Datetime
@@ -63,51 +56,27 @@ class Key
     }
 
     /**
-     * Set label
+     * Set name
      *
-     * @param string $label
+     * @param string $name
      *
-     * @return Key
+     * @return Origin
      */
-    public function setLabel($label)
+    public function setName($name)
     {
-        $this->label = $label;
+        $this->name = $name;
 
         return $this;
     }
 
     /**
-     * Get label
+     * Get name
      *
      * @return string
      */
-    public function getLabel()
+    public function getName()
     {
-        return $this->label;
-    }
-
-    /**
-     * Set token
-     *
-     * @param string $token
-     *
-     * @return Key
-     */
-    public function setToken($token)
-    {
-        $this->token = $token;
-
-        return $this;
-    }
-
-    /**
-     * Get token
-     *
-     * @return string
-     */
-    public function getToken()
-    {
-        return $this->token;
+        return $this->name;
     }
 
     /**
@@ -158,4 +127,3 @@ class Key
         return $this;
     }
 }
-

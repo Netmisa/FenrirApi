@@ -1,17 +1,31 @@
 <?php
 
-namespace CoreBundle\Entity;
+namespace ApiBundle\Entity;
 
+use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use ApiBundle\Entity\Origin;
 
 /**
- * Origin
+ * Users
  *
- * @ORM\Table(name="origin")
- * @ORM\Entity(repositoryClass="CoreBundle\Repository\OriginRepository")
+ * @ORM\Table(name="t_user")
+ * @ORM\Entity(repositoryClass="ApiBundle\Repository\UserRepository")
+ * @ORM\AttributeOverrides({
+ *      @ORM\AttributeOverride(name="email", column=@ORM\Column(nullable = true)),
+ *      @ORM\AttributeOverride(name="emailCanonical",
+ *          column=@ORM\Column(
+ *              nullable = true,
+ *              unique   = false
+ *          )
+ *      ),
+ *      @ORM\AttributeOverride(name="salt", column=@ORM\Column(nullable = true)),
+ *      @ORM\AttributeOverride(name="password", column=@ORM\Column(nullable = true)),
+ * })
+ *
  */
-class Origin
+class User extends BaseUser
 {
     /**
      * @var int
@@ -20,20 +34,21 @@ class Origin
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
-     * @var string
+     * @var Origin
      *
-     * @ORM\Column(name="name", type="string", length=255, unique=true)
+     * @ORM\ManyToOne(targetEntity="ApiBundle\Entity\Origin")
+     * @ORM\JoinColumn(name="origin_id", referencedColumnName="id", nullable=false)
      */
-    private $name;
+    private $origin;
 
     /**
      * @var \Datetime
      *
-     * @Gedmo\Timestampable(on="create")
      * @ORM\Column(type="datetime")
+     * @Gedmo\Timestampable(on="create")
      */
     private $createdAt;
 
@@ -44,6 +59,11 @@ class Origin
      * @Gedmo\Timestampable(on="update")
      */
     private $updatedAt;
+
+    public function __construct()
+    {
+        parent::__construct();
+    }
 
     /**
      * Get id
@@ -56,27 +76,27 @@ class Origin
     }
 
     /**
-     * Set name
-     *
-     * @param string $name
-     *
-     * @return Origin
-     */
-    public function setName($name)
+    * Gets the value of origin.
+    *
+    * @return Origin
+    */
+    public function getOrigin()
     {
-        $this->name = $name;
-
-        return $this;
+        return $this->origin;
     }
 
     /**
-     * Get name
-     *
-     * @return string
-     */
-    public function getName()
+    * Sets the value of origin.
+    *
+    * @param Origin $origin the origin
+    *
+    * @return self
+    */
+    public function setOrigin(Origin $origin)
     {
-        return $this->name;
+        $this->origin = $origin;
+
+        return $this;
     }
 
     /**

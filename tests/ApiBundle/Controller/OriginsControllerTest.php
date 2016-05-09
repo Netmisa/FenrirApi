@@ -1,18 +1,20 @@
 <?php
 
-namespace Tests\CoreBundle\Controller;
+namespace Tests\ApiBundle\Controller;
 
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-use CoreBundle\Entity\Origin;
+use ApiBundle\Entity\Origin;
 
-class OriginControllerTest extends WebTestCase
+class OriginsControllerTest extends WebTestCase
 {
     /**
      * @var EntityManager
      */
     private $em;
+
+    private $origins;
 
     /**
      * Constructor.
@@ -26,6 +28,7 @@ class OriginControllerTest extends WebTestCase
             ->get('doctrine')
             ->getManager()
         ;
+        $this->origins = [];
     }
 
     /**
@@ -35,17 +38,17 @@ class OriginControllerTest extends WebTestCase
     {
         parent::setUp();
 
-        $originTableName = $this->em->getClassMetadata('CoreBundle:Origin')->getTableName();
+        $originTableName = $this->em->getClassMetadata('ApiBundle:Origin')->getTableName();
         $this->em->getConnection()->query('delete from '.$originTableName);
 
-        $origin0 = new Origin();
-        $origin0->setName('navitia.io');
+        $this->origins[] = new Origin();
+        $this->origins[0]->setName('navitia.io');
 
-        $origin1 = new Origin();
-        $origin1->setName('sncf');
+        $this->origins[] = new Origin();
+        $this->origins[1]->setName('sncf');
 
-        $this->em->persist($origin0);
-        $this->em->persist($origin1);
+        $this->em->persist($this->origins[0]);
+        $this->em->persist($this->origins[1]);
         $this->em->flush();
     }
 
@@ -113,7 +116,7 @@ class OriginControllerTest extends WebTestCase
     {
         $client = static::createClient();
 
-        $client->request('PATCH', '/origins/1', [
+        $client->request('PATCH', '/origins/' . $this->origins[0]->getId(), [
             'name' => 'navitia.io_updated',
         ]);
 
@@ -128,7 +131,7 @@ class OriginControllerTest extends WebTestCase
     {
         $client = static::createClient();
 
-        $client->request('DELETE', '/origins/1');
+        $client->request('DELETE', '/origins/' . $this->origins[0]->getId());
 
         $this->assertTrue($client->getResponse()->isSuccessful(), 'patch origins returns a successful status code');
 

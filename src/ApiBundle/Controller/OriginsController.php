@@ -1,6 +1,6 @@
 <?php
 
-namespace CoreBundle\Controller;
+namespace ApiBundle\Controller;
 
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Symfony\Component\HttpFoundation\Response;
@@ -9,9 +9,9 @@ use FOS\RestBundle\View\View;
 use FOS\RestBundle\Request\ParamFetcher;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Controller\FOSRestController;
-use CoreBundle\Entity\Origin;
+use ApiBundle\Entity\Origin;
 
-class OriginController extends FOSRestController
+class OriginsController extends FOSRestController
 {
     /**
      * Retrieve all origins.
@@ -22,7 +22,7 @@ class OriginController extends FOSRestController
      */
     public function getOriginsAction()
     {
-        $originRepository = $this->getDoctrine()->getRepository('CoreBundle:Origin');
+        $originRepository = $this->getDoctrine()->getRepository('ApiBundle:Origin');
 
         return View::create($originRepository->findAll());
     }

@@ -29,14 +29,15 @@
         "sensio/framework-extra-bundle": "^3.0.2",
         "incenteev/composer-parameter-handler": "^2.0",
         "friendsofsymfony/user-bundle": "dev-master@dev",
-        "cube/composer-dist-installer": "1.0.*@beta",
-        "friendsofsymfony/rest-bundle": "2.x@dev",
-        "gedmo/doctrine-extensions": "2.4.4"
+        "gedmo/doctrine-extensions": "2.4.4",
+        "friendsofsymfony/rest-bundle": "2.0.0-BETA2",
+        "jms/serializer-bundle": "1.1.0",
+        "cube/composer-dist-installer": "1.0.*@beta"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",
-        "phpunit/phpunit": "^5.0",
-        "symfony/phpunit-bridge": "^3.0"
+        "symfony/phpunit-bridge": "^3.0",
+        "phpunit/phpunit": "4.8.*"
     },
     "scripts": {
         "post-install-cmd": [

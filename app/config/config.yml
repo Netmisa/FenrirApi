@@ -2,7 +2,7 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: services.yml }
-    - { resource: "@CoreBundle/Resources/config/services.yml" }
+    - { resource: "@ApiBundle/Resources/config/services.yml" }
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
@@ -71,7 +71,7 @@ swiftmailer:
 fos_user:
     db_driver: orm
     firewall_name: main
-    user_class: CoreBundle\Entity\User
+    user_class: ApiBundle\Entity\User
 
 fos_rest:
     disable_csrf_role: IS_AUTHENTICATED_ANONYMOUSLY
@@ -79,6 +79,5 @@ fos_rest:
         default_format: json
     param_fetcher_listener: true
     body_listener: true
-    versioning: true
     view:
         view_response_listener: force

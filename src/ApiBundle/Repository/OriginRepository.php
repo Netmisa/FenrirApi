@@ -1,6 +1,6 @@
 <?php
 
-namespace CoreBundle\Repository;
+namespace ApiBundle\Repository;
 
 /**
  * OriginRepository
