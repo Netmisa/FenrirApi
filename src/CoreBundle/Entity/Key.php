@@ -32,14 +32,14 @@ class Key
     /**
      * @var string
      *
-     * @ORM\Column(name="token", type="string", length=36, unique=true)
+     * @ORM\Column(name="token", type="guid", unique=true)
      */
     private $token;
 
     /**
      * @var \Datetime
      *
-     * @Gedmo\Timestampable(on="created_at")
+     * @Gedmo\Timestampable(on="create")
      * @ORM\Column(type="datetime")
      */
     private $createdAt;
@@ -48,7 +48,7 @@ class Key
      * @var \Datetime
      *
      * @ORM\Column(type="datetime")
-     * @Gedmo\Timestampable(on="updated_at")
+     * @Gedmo\Timestampable(on="update")
      */
     private $updatedAt;
 
