@@ -2,6 +2,7 @@
 
 namespace ApiBundle\Controller;
 
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Request\ParamFetcherInterface;
@@ -27,7 +28,7 @@ class UsersController extends FOSRestController
     {
         $this->get('core.service.user')->deleteUser($user);
 
-        return $this->handleView($this->view([]));
+        return $this->handleView($this->view(null, Response::HTTP_NO_CONTENT));
     }
 
     /**
@@ -45,7 +46,7 @@ class UsersController extends FOSRestController
     {
         $user = $this->get('core.service.user')->create($paramFetcher->all());
 
-        return $this->handleView($this->view($user));
+        return $this->handleView($this->view($user, Response::HTTP_CREATED));
     }
 
     /**
