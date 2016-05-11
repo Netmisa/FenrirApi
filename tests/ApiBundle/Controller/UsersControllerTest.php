@@ -101,7 +101,7 @@ class UsersControllerTest extends WebTestCase
         foreach ($this->databaseUsers as $databaseUser) {
             $crawler = $client->request('DELETE', '/users/' . $databaseUser->getId());
 
-            $this->assertEquals($client->getResponse()->getStatusCode(), Response::HTTP_OK);
+            $this->assertEquals($client->getResponse()->getStatusCode(), Response::HTTP_NO_CONTENT);
         }
     }
 
