@@ -10,4 +10,19 @@ namespace ApiBundle\Repository;
  */
 class OriginRepository extends \Doctrine\ORM\EntityRepository
 {
+    /**
+     * @param int|string $idOrName
+     *
+     * @return Origin
+     */
+    public function findByIdOrName($idOrName)
+    {
+        return $this->createQueryBuilder('origin')
+            ->where('origin.id = :id_or_name')
+            ->orWhere('origin.name = :id_or_name')
+            ->setParameter('id_or_name', $idOrName)
+            ->getQuery()
+            ->getSingleResult()
+        ;
+    }
 }
