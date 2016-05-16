@@ -17,9 +17,15 @@ class OriginRepository extends \Doctrine\ORM\EntityRepository
      */
     public function findByIdOrName($idOrName)
     {
-        return $this->createQueryBuilder('origin')
-            ->where('origin.id = :id_or_name')
-            ->orWhere('origin.name = :id_or_name')
+        $query = $this->createQueryBuilder('origin');
+
+        if (is_numeric($idOrName)) {
+            $query->where('origin.id = :id_or_name');
+        } else {
+            $query->where('origin.name = :id_or_name');
+        }
+
+        return $query
             ->setParameter('id_or_name', $idOrName)
             ->getQuery()
             ->getSingleResult()
