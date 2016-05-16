@@ -14,6 +14,9 @@ class OriginsControllerTest extends WebTestCase
      */
     private $em;
 
+    /**
+     * @var Origin[]
+     */
     private $origins;
 
     /**
@@ -88,6 +91,21 @@ class OriginsControllerTest extends WebTestCase
         $this->assertObjectHasAttribute('name', $response);
         $this->assertEquals($firstOrigin->id, $response->id);
         $this->assertEquals($firstOrigin->name, $response->name);
+    }
+
+    public function testGetOriginWorksAlsoByName()
+    {
+        $client = static::createClient();
+
+        $client->request('GET', '/origins/navitia.io');
+
+        $this->assertTrue($client->getResponse()->isSuccessful(), 'get origins by name returns successful status code');
+
+        $response = json_decode($client->getResponse()->getContent());
+
+        $this->assertObjectHasAttribute('id', $response);
+        $this->assertObjectHasAttribute('name', $response);
+        $this->assertEquals('navitia.io', $response->name);
     }
 
     public function testPostOrigin()

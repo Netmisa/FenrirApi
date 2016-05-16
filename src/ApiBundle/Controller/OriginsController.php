@@ -5,6 +5,7 @@ namespace ApiBundle\Controller;
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use FOS\RestBundle\View\View;
 use FOS\RestBundle\Request\ParamFetcher;
 use FOS\RestBundle\Controller\Annotations as Rest;
@@ -30,7 +31,11 @@ class OriginsController extends FOSRestController
     /**
      * Retrieve one origin by id.
      *
-     * @Rest\Route("/origins/{id}")
+     * @Rest\Route("/origins/{id_or_name}", requirements={"id_or_name": ".+"})
+     * @ParamConverter("origin", class="ApiBundle:Origin", options={
+     *      "repository_method" = "findByIdOrName",
+     *      "id": "id_or_name"
+     * })
      *
      * @param Origin $origin
      *
