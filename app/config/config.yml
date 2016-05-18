@@ -3,6 +3,7 @@ imports:
     - { resource: security.yml }
     - { resource: services.yml }
     - { resource: "@ApiBundle/Resources/config/services.yml" }
+    - { resource: "@TyrSynchroBundle/Resources/config/services.yml" }
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
@@ -81,3 +82,23 @@ fos_rest:
     body_listener: true
     view:
         view_response_listener: force
+
+old_sound_rabbit_mq:
+    connections:
+        default:
+            host: '%rabbit_mq_host%'
+            port: '%rabbit_mq_port%'
+            user: '%rabbit_mq_user%'
+            password: '%rabbit_mq_password%'
+            vhost:    '%rabbit_mq_vhost%'
+            lazy:     false
+            connection_timeout: 3
+            read_write_timeout: 3
+            keepalive: false
+            heartbeat: 0
+    consumers:
+        tyr_event:
+            connection: default
+            exchange_options: {name: 'tyr_event', type: direct}
+            queue_options:    {name: 'tyr_event'}
+            callback:         tyr.event.rabbitmq

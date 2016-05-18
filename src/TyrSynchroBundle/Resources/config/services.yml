@@ -1,0 +1,3 @@
+services:
+    tyr.event.rabbitmq:
+        class: TyrSynchroBundle\Service\TyrEventConsumer
