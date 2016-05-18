@@ -1,3 +1,8 @@
+tyr_synchro:
+    resource: "@TyrSynchroBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 api:
     resource: "@ApiBundle/Resources/config/routing.yml"
     prefix:   /

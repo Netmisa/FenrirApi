@@ -32,7 +32,8 @@
         "gedmo/doctrine-extensions": "2.4.4",
         "friendsofsymfony/rest-bundle": "2.0.0-BETA2",
         "jms/serializer-bundle": "1.1.0",
-        "cube/composer-dist-installer": "1.0.*@beta"
+        "cube/composer-dist-installer": "1.0.*@beta",
+        "php-amqplib/rabbitmq-bundle": "^1.9"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",

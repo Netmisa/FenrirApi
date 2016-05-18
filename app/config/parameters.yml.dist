@@ -14,6 +14,12 @@ parameters:
     database_test_user:     {{Fenrir Api Database User Test []?|=ENV[FENRIR_API_DATABASE_TEST_USER]|fenrir_user}}
     database_test_password: {{Fenrir Api Database Password Test []?|=ENV[FENRIR_API_DATABASE_TEST_PASSWORD]|fenrir_password}}
 
+    rabbit_mq_host:     {{Fenrir Api RabbitMQ Host []?|=ENV[FENRIR_API_RABBITMQ_HOST]|127.0.0.1}}
+    rabbit_mq_port:     {{Fenrir Api RabbitMQ Port []?|=ENV[FENRIR_API_RABBITMQ_PORT]|5672}}
+    rabbit_mq_user:     {{Fenrir Api RabbitMQ User []?|=ENV[FENRIR_API_RABBITMQ_USER]|guest}}
+    rabbit_mq_password: {{Fenrir Api RabbitMQ Password []?|=ENV[FENRIR_API_RABBITMQ_PASSWORD]|guest}}
+    rabbit_mq_vhost:    {{Fenrir Api RabbitMQ Vhost []?|=ENV[FENRIR_API_RABBITMQ_VHOST]|'/'}}
+
     mailer_transport:  smtp
     mailer_host:       127.0.0.1
     mailer_user:       ~
