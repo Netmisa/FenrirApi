@@ -3,6 +3,7 @@
 namespace ApiBundle\Service;
 
 use Doctrine\ORM\EntityManager;
+use ApiBundle\Entity\Origin;
 
 class OriginManager
 {
@@ -13,6 +14,16 @@ class OriginManager
     {
         $this->em = $em;
         $this->repository = $em->getRepository('ApiBundle:Origin');
+    }
+
+    public function create($name)
+    {
+        $origin = new Origin();
+
+        $origin->setName($name);
+        $this->em->persist($origin);
+        $this->em->flush();
+        return $origin;
     }
 
     public function find($id)

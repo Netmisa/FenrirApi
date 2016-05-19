@@ -10,9 +10,10 @@ use ApiBundle\Entity\Origin;
 /**
  * Users
  *
- * @ORM\Table(name="t_user")
+ * @ORM\Table(name="t_user", uniqueConstraints={@ORM\UniqueConstraint(name="test", columns={"username_canonical", "origin_id"})})
  * @ORM\Entity(repositoryClass="ApiBundle\Repository\UserRepository")
  * @ORM\AttributeOverrides({
+ *      @ORM\AttributeOverride(name="usernameCanonical", column=@ORM\Column(unique = false)),
  *      @ORM\AttributeOverride(name="email", column=@ORM\Column(nullable = true)),
  *      @ORM\AttributeOverride(name="emailCanonical",
  *          column=@ORM\Column(
