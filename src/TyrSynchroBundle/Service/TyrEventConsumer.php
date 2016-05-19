@@ -22,7 +22,7 @@ class TyrEventConsumer implements ConsumerInterface
 
     /**
      * @param UserManagerInterface $userManager
-     * @param ObjectManager $om
+     * @param ObjectManager        $om
      */
     public function __construct(UserManagerInterface $userManager, ObjectManager $om)
     {
@@ -31,7 +31,7 @@ class TyrEventConsumer implements ConsumerInterface
     }
 
     /**
-     * {@InheritDoc}
+     * {@inheritdoc}
      *
      * Expected JSON message:
      * {"event": "create_user", "data": {...}}
@@ -45,17 +45,14 @@ class TyrEventConsumer implements ConsumerInterface
                 $user = $this->userManager->createUser();
                 $this->updateUser($message->data, $user);
                 break;
-
             case 'update_user':
                 $user = $this->userManager->findUserByUsername($message->data->username);
                 $this->updateUser($message->data, $user);
                 break;
-
             case 'delete_user':
                 $user = $this->userManager->findUserByUsername($message->data->username);
                 $this->deleteUser($user);
                 break;
-
             default:
                 throw new \RuntimeException('Unknown event "'.$message->event.'"');
         }

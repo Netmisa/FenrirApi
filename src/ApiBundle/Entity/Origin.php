@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * Origin
+ * Origin.
  *
  * @ORM\Table(name="origin")
  * @ORM\Entity(repositoryClass="ApiBundle\Repository\OriginRepository")
@@ -46,7 +46,7 @@ class Origin
     private $updatedAt;
 
     /**
-     * Get id
+     * Get id.
      *
      * @return int
      */
@@ -56,7 +56,7 @@ class Origin
     }
 
     /**
-     * Set name
+     * Set name.
      *
      * @param string $name
      *
@@ -70,7 +70,7 @@ class Origin
     }
 
     /**
-     * Get name
+     * Get name.
      *
      * @return string
      */
@@ -80,22 +80,22 @@ class Origin
     }
 
     /**
-    * Gets the value of createdAt.
-    *
-    * @return \Datetime
-    */
+     * Gets the value of createdAt.
+     *
+     * @return \Datetime
+     */
     public function getCreatedAt()
     {
         return $this->createdAt;
     }
 
     /**
-    * Sets the value of createdAt.
-    *
-    * @param \Datetime $createdAt the created at
-    *
-    * @return self
-    */
+     * Sets the value of createdAt.
+     *
+     * @param \Datetime $createdAt the created at
+     *
+     * @return self
+     */
     public function setCreatedAt(\Datetime $createdAt)
     {
         $this->createdAt = $createdAt;
@@ -104,22 +104,22 @@ class Origin
     }
 
     /**
-    * Gets the value of updatedAt.
-    *
-    * @return \Datetime
-    */
+     * Gets the value of updatedAt.
+     *
+     * @return \Datetime
+     */
     public function getUpdatedAt()
     {
         return $this->updatedAt;
     }
 
     /**
-    * Sets the value of updatedAt.
-    *
-    * @param \Datetime $updatedAt the updated at
-    *
-    * @return self
-    */
+     * Sets the value of updatedAt.
+     *
+     * @param \Datetime $updatedAt the updated at
+     *
+     * @return self
+     */
     public function setUpdatedAt(\Datetime $updatedAt)
     {
         $this->updatedAt = $updatedAt;

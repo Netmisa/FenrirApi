@@ -76,7 +76,7 @@ class OriginsController extends FOSRestController
      * @Rest\RequestParam(name="name", requirements="[a-z_\.]+")
      *
      * @param ParamFetcher $paramFetcher
-     * @param Origin $origin
+     * @param Origin       $origin
      *
      * @return View
      *
