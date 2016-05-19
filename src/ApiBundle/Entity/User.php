@@ -45,6 +45,16 @@ class User extends BaseUser
     private $origin;
 
     /**
+     * Whether this user is an internal user,
+     * and api usage statistics should not be billed.
+     *
+     * @var bool
+     *
+     * @ORM\Column(type="boolean")
+     */
+    private $isInternal;
+
+    /**
      * @var \Datetime
      *
      * @ORM\Column(type="datetime")
@@ -59,11 +69,6 @@ class User extends BaseUser
      * @Gedmo\Timestampable(on="update")
      */
     private $updatedAt;
-
-    public function __construct()
-    {
-        parent::__construct();
-    }
 
     /**
      * Get id
@@ -95,6 +100,26 @@ class User extends BaseUser
     public function setOrigin(Origin $origin)
     {
         $this->origin = $origin;
+
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isInternal()
+    {
+        return $this->isInternal;
+    }
+
+    /**
+     * @param bool $isInternal
+     *
+     * @return self
+     */
+    public function setInternal($isInternal)
+    {
+        $this->isInternal = $isInternal;
 
         return $this;
     }

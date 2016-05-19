@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "a9233cbb55a0215110be1fcdcfa97712",
+    "hash": "a809c93909acb66cf6738f479c92b723",
     "content-hash": "0c81255c0c55119155ea5da3a4ac3732",
     "packages": [
         {
@@ -949,12 +949,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/FOSUserBundle.git",
-                "reference": "def27463609e24af410b2606f0062de46fab5662"
+                "reference": "abb35b94ed8ec78a504c9e1a2cd803d85d3ffad9"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/abb35b94ed8ec78a504c9e1a2cd803d85d3ffad9",
-                "reference": "def27463609e24af410b2606f0062de46fab5662",
+                "reference": "abb35b94ed8ec78a504c9e1a2cd803d85d3ffad9",
                 "shasum": ""
             },
             "require": {
@@ -1010,7 +1010,7 @@
             "keywords": [
                 "User management"
             ],
-            "time": "2016-04-28 10:51:07"
+            "time": "2016-05-13 11:27:34"
         },
         {
             "name": "gedmo/doctrine-extensions",
@@ -2434,16 +2434,16 @@
         },
         {
             "name": "symfony/symfony",
-            "version": "v3.0.4",
+            "version": "v3.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "4e17cb2ecb3fd637097ebeb871fc0e2cbdd5e7ff"
+                "reference": "a821ed51b87f5ceda834140e5f0c06e9547a86d4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/4e17cb2ecb3fd637097ebeb871fc0e2cbdd5e7ff",
-                "reference": "4e17cb2ecb3fd637097ebeb871fc0e2cbdd5e7ff",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/a821ed51b87f5ceda834140e5f0c06e9547a86d4",
+                "reference": "a821ed51b87f5ceda834140e5f0c06e9547a86d4",
                 "shasum": ""
             },
             "require": {
@@ -2526,7 +2526,11 @@
             },
             "autoload": {
                 "psr-4": {
-                    "Symfony\\Bridge\\": "src/Symfony/Bridge/",
+                    "Symfony\\Bridge\\Doctrine\\": "src/Symfony/Bridge/Doctrine/",
+                    "Symfony\\Bridge\\Monolog\\": "src/Symfony/Bridge/Monolog/",
+                    "Symfony\\Bridge\\ProxyManager\\": "src/Symfony/Bridge/ProxyManager/",
+                    "Symfony\\Bridge\\Swiftmailer\\": "src/Symfony/Bridge/Swiftmailer/",
+                    "Symfony\\Bridge\\Twig\\": "src/Symfony/Bridge/Twig/",
                     "Symfony\\Bundle\\": "src/Symfony/Bundle/",
                     "Symfony\\Component\\": "src/Symfony/Component/"
                 },
@@ -2556,7 +2560,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2016-03-30 10:41:14"
+            "time": "2016-05-09 22:13:31"
         },
         {
             "name": "twig/twig",
@@ -3066,16 +3070,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "4.8.24",
+            "version": "4.8.26",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "a1066c562c52900a142a0e2bbf0582994671385e"
+                "reference": "fc1d8cd5b5de11625979125c5639347896ac2c74"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/a1066c562c52900a142a0e2bbf0582994671385e",
-                "reference": "a1066c562c52900a142a0e2bbf0582994671385e",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/fc1d8cd5b5de11625979125c5639347896ac2c74",
+                "reference": "fc1d8cd5b5de11625979125c5639347896ac2c74",
                 "shasum": ""
             },
             "require": {
@@ -3089,7 +3093,7 @@
                 "phpunit/php-code-coverage": "~2.1",
                 "phpunit/php-file-iterator": "~1.4",
                 "phpunit/php-text-template": "~1.2",
-                "phpunit/php-timer": ">=1.0.6",
+                "phpunit/php-timer": "^1.0.6",
                 "phpunit/phpunit-mock-objects": "~2.3",
                 "sebastian/comparator": "~1.1",
                 "sebastian/diff": "~1.2",
@@ -3134,7 +3138,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2016-03-14 06:16:08"
+            "time": "2016-05-17 03:09:28"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
@@ -3617,16 +3621,16 @@
         },
         {
             "name": "symfony/phpunit-bridge",
-            "version": "v3.0.4",
+            "version": "v3.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/phpunit-bridge.git",
-                "reference": "b097218e4ab7724e7ec0c420e96dfd70518c2354"
+                "reference": "3231629ff97abccd60f93ff900accfb5b39c8200"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/phpunit-bridge/zipball/b097218e4ab7724e7ec0c420e96dfd70518c2354",
-                "reference": "b097218e4ab7724e7ec0c420e96dfd70518c2354",
+                "url": "https://api.github.com/repos/symfony/phpunit-bridge/zipball/3231629ff97abccd60f93ff900accfb5b39c8200",
+                "reference": "3231629ff97abccd60f93ff900accfb5b39c8200",
                 "shasum": ""
             },
             "require": {
@@ -3668,7 +3672,7 @@
             ],
             "description": "Symfony PHPUnit Bridge",
             "homepage": "https://symfony.com",
-            "time": "2016-03-23 13:46:08"
+            "time": "2016-04-12 18:09:53"
         }
     ],
     "aliases": [],
