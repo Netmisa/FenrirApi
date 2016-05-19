@@ -7,15 +7,21 @@ use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 use FOS\UserBundle\Util\CanonicalizerInterface;
 use FOS\UserBundle\Doctrine\UserManager as BaseUserManager;
 use FOS\UserBundle\Model\UserInterface;
-use ApiBundle\Service\OriginManager;
 
 class UserManager extends BaseUserManager
 {
     private $originManager;
     private $internalPattern;
 
-    public function __construct(EncoderFactoryInterface $encoderFactory, CanonicalizerInterface $usernameCanonicalizer, CanonicalizerInterface $emailCanonicalizer, ObjectManager $om, $class, OriginManager $originManager, $internalPattern)
-    {
+    public function __construct(
+        EncoderFactoryInterface $encoderFactory,
+        CanonicalizerInterface $usernameCanonicalizer,
+        CanonicalizerInterface $emailCanonicalizer,
+        ObjectManager $om,
+        $class,
+        OriginManager $originManager,
+        $internalPattern
+    ) {
         parent::__construct($encoderFactory, $usernameCanonicalizer, $emailCanonicalizer, $om, $class);
 
         $this->originManager = $originManager;
@@ -66,7 +72,7 @@ class UserManager extends BaseUserManager
     }
 
     /**
-     * {@InheritDoc}
+     * {@inheritdoc}
      *
      * And the "isInternal" boolean is also updated.
      */
@@ -87,6 +93,7 @@ class UserManager extends BaseUserManager
         if (is_null($this->internalPattern)) {
             return false;
         }
+
         return preg_match($this->internalPattern, $user->getEmail());
     }
 }
