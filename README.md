@@ -1,13 +1,12 @@
-README
+FenrirApi
 ======
 
 Requirements
 -------------
 
-- php5, php5-pgsql librairies
+- php5
 - git
 - composer
-- postGreSQL database
 
 Installation
 -------------
