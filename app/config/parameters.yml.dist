@@ -28,4 +28,5 @@ parameters:
     # A secret key that's used to generate certain security-related tokens
     secret:            ThisTokenIsNotSoSecretChangeIt
 
-    api_email_internal_pattern: ~
+    api_email_internal_pattern: {{Pattern to check if it is an internal user []?|=ENV[FENRIR_API_EMAIL_INTERNAL_PATTERN]|~}}
+    consumers_tyr_event_exchange: {{Exchange name of event queue []?|=ENV[FENRIR_API_EMAIL_INTERNAL_PATTERN]|tyr_exchange}}

@@ -99,7 +99,7 @@ old_sound_rabbit_mq:
     consumers:
         tyr_event:
             connection: default
-            exchange_options: {name: 'tyr_event', type: direct}
+            exchange_options: {name: '%consumers_tyr_event_exchange%', type: direct}
             queue_options:    {name: 'tyr_event'}
             callback:         tyr.event.rabbitmq
 

@@ -66,7 +66,7 @@ class TyrEventConsumer implements ConsumerInterface
         $origin = $this->originManager->findOrCreateByName($data->origin->name);
 
         $user
-            ->setUsername($data->login)
+            ->setUsername($data->username)
             ->setEmail($data->email)
             ->setOrigin($origin)
         ;

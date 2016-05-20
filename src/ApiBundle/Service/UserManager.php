@@ -94,6 +94,6 @@ class UserManager extends BaseUserManager
             return false;
         }
 
-        return preg_match($this->internalPattern, $user->getEmail());
+        return preg_match($this->internalPattern, $user->getUsername());
     }
 }
