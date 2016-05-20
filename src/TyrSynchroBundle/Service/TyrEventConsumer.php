@@ -46,7 +46,7 @@ class TyrEventConsumer implements ConsumerInterface
                 $this->updateUser($message->data, $user);
                 break;
             case 'update_user':
-                $user = $this->userManager->findUserByUsername($message->data->username);
+                $user = $this->userManager->findUserByUsername($message->data->last_username);
                 $this->updateUser($message->data, $user);
                 break;
             case 'delete_user':
