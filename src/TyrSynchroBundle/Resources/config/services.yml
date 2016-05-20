@@ -3,4 +3,4 @@ services:
         class: TyrSynchroBundle\Service\TyrEventConsumer
         arguments:
             - "@core.service.user"
-            - "@doctrine.orm.entity_manager"
+            - "@core.service.origin"
