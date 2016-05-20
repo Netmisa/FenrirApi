@@ -4,9 +4,9 @@ namespace TyrSynchroBundle\Service;
 
 use OldSound\RabbitMqBundle\RabbitMq\ConsumerInterface;
 use PhpAmqpLib\Message\AMQPMessage;
-use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Security\Core\User\UserInterface;
 use FOS\UserBundle\Model\UserManagerInterface;
+use ApiBundle\Service\OriginManager;
 
 class TyrEventConsumer implements ConsumerInterface
 {
@@ -16,18 +16,18 @@ class TyrEventConsumer implements ConsumerInterface
     private $userManager;
 
     /**
-     * @var ObjectManager
+     * @var OriginManager
      */
-    private $om;
+    private $originManager;
 
     /**
      * @param UserManagerInterface $userManager
      * @param ObjectManager        $om
      */
-    public function __construct(UserManagerInterface $userManager, ObjectManager $om)
+    public function __construct(UserManagerInterface $userManager, OriginManager $originManager)
     {
         $this->userManager = $userManager;
-        $this->om = $om;
+        $this->originManager = $originManager;
     }
 
     /**
@@ -63,9 +63,7 @@ class TyrEventConsumer implements ConsumerInterface
      */
     private function updateUser(\stdClass $data, UserInterface $user)
     {
-        $originRepository = $this->om->getRepository('ApiBundle:Origin');
-
-        $origin = $originRepository->findOneByName($data->origin->name);
+        $origin = $this->originManager->findOrCreateByName($data->origin->name);
 
         $user
             ->setUsername($data->login)
