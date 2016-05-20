@@ -14,6 +14,7 @@ services:
       - '@fos_user.object_manager'
       - '%fos_user.model.user.class%'
       - '@core.service.origin'
+      - '%internal_email.pattern%'
   core.service.origin:
     class: ApiBundle\Service\OriginManager
     arguments:

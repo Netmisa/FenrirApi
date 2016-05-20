@@ -5,10 +5,9 @@ namespace ApiBundle\Entity;
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use ApiBundle\Entity\Origin;
 
 /**
- * Users
+ * Users.
  *
  * @ORM\Table(name="t_user", uniqueConstraints={@ORM\UniqueConstraint(name="test", columns={"username_canonical", "origin_id"})})
  * @ORM\Entity(repositoryClass="ApiBundle\Repository\UserRepository")
@@ -24,7 +23,6 @@ use ApiBundle\Entity\Origin;
  *      @ORM\AttributeOverride(name="salt", column=@ORM\Column(nullable = true)),
  *      @ORM\AttributeOverride(name="password", column=@ORM\Column(nullable = true)),
  * })
- *
  */
 class User extends BaseUser
 {
@@ -46,6 +44,16 @@ class User extends BaseUser
     private $origin;
 
     /**
+     * Whether this user is an internal user,
+     * and api usage statistics should not be billed.
+     *
+     * @var bool
+     *
+     * @ORM\Column(type="boolean")
+     */
+    private $isInternal;
+
+    /**
      * @var \Datetime
      *
      * @ORM\Column(type="datetime")
@@ -61,13 +69,8 @@ class User extends BaseUser
      */
     private $updatedAt;
 
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
     /**
-     * Get id
+     * Get id.
      *
      * @return int
      */
@@ -77,22 +80,22 @@ class User extends BaseUser
     }
 
     /**
-    * Gets the value of origin.
-    *
-    * @return Origin
-    */
+     * Gets the value of origin.
+     *
+     * @return Origin
+     */
     public function getOrigin()
     {
         return $this->origin;
     }
 
     /**
-    * Sets the value of origin.
-    *
-    * @param Origin $origin the origin
-    *
-    * @return self
-    */
+     * Sets the value of origin.
+     *
+     * @param Origin $origin the origin
+     *
+     * @return self
+     */
     public function setOrigin(Origin $origin)
     {
         $this->origin = $origin;
@@ -101,22 +104,42 @@ class User extends BaseUser
     }
 
     /**
-    * Gets the value of createdAt.
-    *
-    * @return \Datetime
-    */
+     * @return bool
+     */
+    public function isInternal()
+    {
+        return $this->isInternal;
+    }
+
+    /**
+     * @param bool $isInternal
+     *
+     * @return self
+     */
+    public function setInternal($isInternal)
+    {
+        $this->isInternal = $isInternal;
+
+        return $this;
+    }
+
+    /**
+     * Gets the value of createdAt.
+     *
+     * @return \Datetime
+     */
     public function getCreatedAt()
     {
         return $this->createdAt;
     }
 
     /**
-    * Sets the value of createdAt.
-    *
-    * @param \Datetime $createdAt the created at
-    *
-    * @return self
-    */
+     * Sets the value of createdAt.
+     *
+     * @param \Datetime $createdAt the created at
+     *
+     * @return self
+     */
     public function setCreatedAt(\Datetime $createdAt)
     {
         $this->createdAt = $createdAt;
@@ -125,22 +148,22 @@ class User extends BaseUser
     }
 
     /**
-    * Gets the value of updatedAt.
-    *
-    * @return \Datetime
-    */
+     * Gets the value of updatedAt.
+     *
+     * @return \Datetime
+     */
     public function getUpdatedAt()
     {
         return $this->updatedAt;
     }
 
     /**
-    * Sets the value of updatedAt.
-    *
-    * @param \Datetime $updatedAt the updated at
-    *
-    * @return self
-    */
+     * Sets the value of updatedAt.
+     *
+     * @param \Datetime $updatedAt the updated at
+     *
+     * @return self
+     */
     public function setUpdatedAt(\Datetime $updatedAt)
     {
         $this->updatedAt = $updatedAt;

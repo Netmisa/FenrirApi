@@ -2,14 +2,24 @@
 
 namespace ApiBundle\Tests\Controller;
 
+use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Response;
 use ApiBundle\Entity\Origin;
+use ApiBundle\Service\UserManager;
 
 class UsersControllerTest extends WebTestCase
 {
+    /**
+     * @var ObjectManager
+     */
     private $em;
+
+    /**
+     * @var UserManager
+     */
     private $userManager;
+
     private $databaseUsers;
     private $origin;
     private $users = [

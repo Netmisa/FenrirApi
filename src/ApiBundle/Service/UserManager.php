@@ -7,17 +7,25 @@ use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 use FOS\UserBundle\Util\CanonicalizerInterface;
 use FOS\UserBundle\Doctrine\UserManager as BaseUserManager;
 use FOS\UserBundle\Model\UserInterface;
-use ApiBundle\Service\OriginManager;
 
 class UserManager extends BaseUserManager
 {
     private $originManager;
+    private $internalPattern;
 
-    public function __construct(EncoderFactoryInterface $encoderFactory, CanonicalizerInterface $usernameCanonicalizer, CanonicalizerInterface $emailCanonicalizer, ObjectManager $om, $class, OriginManager $originManager)
-    {
+    public function __construct(
+        EncoderFactoryInterface $encoderFactory,
+        CanonicalizerInterface $usernameCanonicalizer,
+        CanonicalizerInterface $emailCanonicalizer,
+        ObjectManager $om,
+        $class,
+        OriginManager $originManager,
+        $internalPattern
+    ) {
         parent::__construct($encoderFactory, $usernameCanonicalizer, $emailCanonicalizer, $om, $class);
 
         $this->originManager = $originManager;
+        $this->internalPattern = $internalPattern;
     }
 
     private function setProperties(UserInterface $user, array $data)
@@ -52,16 +60,40 @@ class UserManager extends BaseUserManager
     {
         $user = $this->createUser();
 
-        $this->setProperties($user, $data);
-        $this->objectManager->persist($user);
-        $this->objectManager->flush();
-        return $user;
+        return $this->update($user, $data);
     }
 
     public function update(UserInterface $user, array $data)
     {
         $this->setProperties($user, $data);
         $this->updateUser($user);
+
         return $user;
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * And the "isInternal" boolean is also updated.
+     */
+    public function updateUser(UserInterface $user, $andFlush = true)
+    {
+        $user->setInternal($this->guessIsInternal($user));
+
+        parent::updateUser($user, $andFlush);
+    }
+
+    /**
+     * @param UserInterface $user
+     *
+     * @return bool
+     */
+    public function guessIsInternal(UserInterface $user)
+    {
+        if (is_null($this->internalPattern)) {
+            return false;
+        }
+
+        return preg_match($this->internalPattern, $user->getUsername());
     }
 }
