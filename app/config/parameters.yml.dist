@@ -29,4 +29,4 @@ parameters:
     secret:            ThisTokenIsNotSoSecretChangeIt
 
     api_email_internal_pattern: {{Pattern to check if it is an internal user []?|=ENV[FENRIR_API_EMAIL_INTERNAL_PATTERN]|~}}
-    consumers_tyr_event_exchange: {{Exchange name of event queue []?|=ENV[FENRIR_API_EMAIL_INTERNAL_PATTERN]|tyr_exchange}}
+    consumers_tyr_event_exchange: {{Exchange name of event queue []?|=ENV[FENRIR_API_CONSUMERS_TYR_EXCHANGE]|tyr_exchange}}
