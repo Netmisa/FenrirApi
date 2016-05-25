@@ -31,22 +31,27 @@ class OriginManager
         return $this->repository->find($id);
     }
 
-    public function findOrCreateByName($name)
+    public function findOneByName($name)
     {
-        $origin = $this->repository->findOneByName($name);
+        return $this->repository->findOneByName($name);
+    }
 
-        if (is_null($origin)) {
-            $origin = new Origin();
+    public function update(Origin $origin)
+    {
+        $this->em->persist($origin);
+        $this->em->flush();
 
-            $origin->setName($name);
-            $this->em->persist($origin);
-            $this->em->flush();
-        }
         return $origin;
     }
 
     public function findAll()
     {
         return $this->repository->findAll();
+    }
+
+    public function remove(Origin $origin)
+    {
+        $this->em->remove($origin);
+        $this->em->flush();
     }
 }

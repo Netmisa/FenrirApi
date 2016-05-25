@@ -9,7 +9,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 /**
  * Users.
  *
- * @ORM\Table(name="t_user", uniqueConstraints={@ORM\UniqueConstraint(name="test", columns={"username_canonical", "origin_id"})})
+ * @ORM\Table(name="t_user", uniqueConstraints={@ORM\UniqueConstraint(name="username_canonical_origin_id", columns={"username_canonical", "origin_id"})})
  * @ORM\Entity(repositoryClass="ApiBundle\Repository\UserRepository")
  * @ORM\AttributeOverrides({
  *      @ORM\AttributeOverride(name="usernameCanonical", column=@ORM\Column(unique = false)),

@@ -7,6 +7,7 @@ use PhpAmqpLib\Message\AMQPMessage;
 use Symfony\Component\Security\Core\User\UserInterface;
 use FOS\UserBundle\Model\UserManagerInterface;
 use ApiBundle\Service\OriginManager;
+use ApiBundle\Entity\Origin;
 
 class TyrEventConsumer implements ConsumerInterface
 {
@@ -53,6 +54,17 @@ class TyrEventConsumer implements ConsumerInterface
                 $user = $this->userManager->findUserByUsername($message->data->username);
                 $this->deleteUser($user);
                 break;
+            case 'create_end_point':
+                $origin = $this->originManager->create($message->data->name);
+                break;
+            case 'update_end_point':
+                $origin = $this->originManager->findOneByName($message->data->last_name);
+                $this->updateOrigin($message->data, $origin);
+                break;
+            case 'delete_end_point':
+                $origin = $this->originManager->findOneByName($message->data->name);
+                $this->deleteOrigin($origin);
+                break;
             default:
                 throw new \RuntimeException('Unknown event "'.$message->event.'"');
         }
@@ -63,7 +75,7 @@ class TyrEventConsumer implements ConsumerInterface
      */
     private function updateUser(\stdClass $data, UserInterface $user)
     {
-        $origin = $this->originManager->findOrCreateByName($data->origin->name);
+        $origin = $this->originManager->findOneByName($data->origin->name);
 
         $user
             ->setUsername($data->username)
@@ -81,5 +93,23 @@ class TyrEventConsumer implements ConsumerInterface
     private function deleteUser(UserInterface $user)
     {
         $this->userManager->deleteUser($user);
+    }
+
+    /**
+     * @param Origin $origin
+     */
+    private function updateOrigin(\stdClass $data, Origin $origin)
+    {
+        $origin->setName($data->name);
+
+        $this->originManager->update($origin);
+    }
+
+    /**
+     * @param Origin $origin
+     */
+    private function deleteOrigin(Origin $origin)
+    {
+        $this->originManager->remove($origin);
     }
 }
